@@ -1,0 +1,226 @@
+# ============================================================
+# Python
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# ============================================================
+# IDEs / Editors
+# ============================================================
+
+# VS Code
+.vscode/
+
+# JetBrains / PyCharm
+.idea/
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+
+# ============================================================
+# OS generated files
+# ============================================================
+
+# Linux
+.directory
+.Trash-*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+
+# ============================================================
+# Obsidian
+# ============================================================
+
+# Obsidian workspace/configuration
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.obsidian/graph.json
+
+# Obsidian local/private configuration
+.obsidian/plugins/
+.obsidian/snippets/
+
+# Obsidian appearance/configuration that may be machine-specific
+.obsidian/appearance.json
+.obsidian/core-plugins.json
+.obsidian/community-plugins.json
+
+# Obsidian metadata
+.obsidian/metadata.json
+
+
+# ============================================================
+# Environment / secrets
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local credentials/configuration
+secrets/
+credentials/
+.local/
+
+
+# ============================================================
+# Logs
+# ============================================================
+
+*.log
+logs/
+
+
+# ============================================================
+# Temporary files
+# ============================================================
+
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.swp
+*.swo
+
+tmp/
+temp/
+
+
+# ============================================================
+# Simulation generated data
+# ============================================================
+
+# Raw simulation output
+data/generated/
+data/raw/
+
+# Large experimental datasets
+results/raw/
+results/generated/
+
+# Temporary simulation files
+simulation_output/
+simulation_outputs/
+
+# Checkpoints
+checkpoints/
+
+# Profiling output
+profiling/
+
+# Benchmark output
+benchmarks/output/
+
+
+# ============================================================
+# Generated scientific output
+# ============================================================
+
+# Uncomment these ONLY if you don't want generated files tracked.
+# I would NOT ignore these permanently if they contain important
+# experimental results.
+
+# results/
+# figures/
+# plots/
+
+
+# ============================================================
+# Compiled / native files
+# ============================================================
+
+*.so
+*.dll
+*.dylib
+*.o
+*.a
+
+# C/C++ build directories if later used for optimization
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+
+
+# ============================================================
+# GPU / CUDA generated files
+# ============================================================
+
+*.ptx
+*.cubin
+
+
+# ============================================================
+# Local experiment configuration
+# ============================================================
+
+config.local.*
+experiment.local.*
+settings.local.*
+.obsidian/app.json
+.obsidian/themes/ITS Theme/manifest.json
+.obsidian/themes/ITS Theme/theme.css
+.obsidian/themes/Wasp/manifest.json
+.obsidian/themes/Wasp/theme.css
