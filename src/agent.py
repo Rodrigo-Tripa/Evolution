@@ -1,30 +1,59 @@
 import random
 
 class Genome:
+
     def __init__(self, alelos):
         self.alelos = alelos
 
-class Agent: 
+    def get_alelo(self):
+        return random.choice(self.alelos)
+
+    def mutate(self, mutation_rate):
+
+        mutation_prob_1 = random.random()
+        mutation_prob_2 = random.random()
+
+
+        if mutation_rate > mutation_prob_1:
+            if self.alelos[0] == "A":
+                self.alelos[0] = "a"
+            elif self.alelos[0] == "a":
+                self.alelos[0] = "A"
+
+        if mutation_rate > mutation_prob_2:
+            if self.alelos[1] == "A":
+                self.alelos[1] = "a"
+            elif self.alelos[1] == "a":
+                self.alelos[1] = "A"
+
+class Phenotype:
+
     def __init__(self, genome):
+
         self.genome = genome
 
-    def get_size(self):
         if self.genome.alelos[0] == "A" and self.genome.alelos[1] == "A":
-            size = 80
+            self.size = 80
         elif self.genome.alelos[0] == "A" or self.genome.alelos[1] == "A":
-            size = 65
+            self.size = 65
         elif self.genome.alelos[0] == "a" and self.genome.alelos[1] == "a":
-            size = 50
+            self.size = 50
 
-        return size
+class Agent: 
+
+    def __init__(self, genome):
+        self.genome = genome
+        self.phenotype = Phenotype(genome)
     
     def reproduce(self, partner):
 
-        self_alelo = random.choice(self.genome.alelos)
+        self_alelo = self.genome.get_alelo()
 
-        partner_alelo = random.choice(partner.genome.alelos)
+        partner_alelo = partner.genome.get_alelo()
 
         new_genome = Genome([self_alelo, partner_alelo])
+
+        new_genome.mutate(0.1)
 
         new_agent = Agent(new_genome)
 
@@ -36,9 +65,6 @@ agent1 = Agent(genome1)
 genome2 = Genome(["A", "a"])
 agent2 = Agent(genome2)
 
-print(agent1.get_size())
-print(agent2.get_size())
-
-agent3 = agent1.reproduce(agent2)
-
-print(agent3.get_size())
+for i in range(100):
+    agent3 = agent1.reproduce(agent2)
+    print(agent3.genome.alelos)
