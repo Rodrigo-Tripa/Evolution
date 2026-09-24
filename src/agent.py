@@ -1,5 +1,6 @@
 import random
 
+
 class Genome:
 
     def __init__(self, alelos):
@@ -13,7 +14,6 @@ class Genome:
         mutation_prob_1 = random.random()
         mutation_prob_2 = random.random()
 
-
         if mutation_rate > mutation_prob_1:
             if self.alelos[0] == "A":
                 self.alelos[0] = "a"
@@ -26,6 +26,7 @@ class Genome:
             elif self.alelos[1] == "a":
                 self.alelos[1] = "A"
 
+
 class Phenotype:
 
     def __init__(self, genome):
@@ -34,37 +35,31 @@ class Phenotype:
 
         if self.genome.alelos[0] == "A" and self.genome.alelos[1] == "A":
             self.size = 80
+
         elif self.genome.alelos[0] == "A" or self.genome.alelos[1] == "A":
             self.size = 65
+
         elif self.genome.alelos[0] == "a" and self.genome.alelos[1] == "a":
             self.size = 50
 
-class Agent: 
+
+class Agent:
 
     def __init__(self, genome):
         self.genome = genome
         self.phenotype = Phenotype(genome)
-    
+
     def reproduce(self, partner):
 
         self_alelo = self.genome.get_alelo()
-
         partner_alelo = partner.genome.get_alelo()
 
-        new_genome = Genome([self_alelo, partner_alelo])
+        new_genome = Genome([
+            self_alelo,
+            partner_alelo
+        ])
 
         new_genome.mutate(0.1)
 
-        new_agent = Agent(new_genome)
+        return Agent(new_genome)
 
-        return new_agent
-
-genome1 = Genome(["A", "a"])
-agent1 = Agent(genome1)
-
-genome2 = Genome(["A", "a"])
-agent2 = Agent(genome2)
-
-for i in range(100):
-    agent3 = agent1.reproduce(agent2)
-    print(agent3.genome.alelos)
