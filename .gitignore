@@ -86,6 +86,8 @@ Desktop.ini
 # Obsidian
 # ============================================================
 
+.obsidian
+
 # Obsidian workspace/configuration
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json

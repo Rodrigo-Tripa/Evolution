@@ -90,6 +90,22 @@ class Population:
 
         return Population(offspring)
 
+    def height_statistics(self):
+
+
+        total = 0
+        if len(self.agents) > 0:
+            for agent in self.agents: 
+                total += agent.phenotype.size
+
+            media = total / len(self.agents)
+
+            return total, media
+        
+        else:
+            media = None
+            return total, media
+
 
 class Simulation:
 

@@ -33,15 +33,18 @@ class Phenotype:
 
         self.genome = genome
 
+        standard_deviation = 4
+
         if self.genome.alelos[0] == "A" and self.genome.alelos[1] == "A":
-            self.size = 80
+            expected_size = 80
 
         elif self.genome.alelos[0] == "A" or self.genome.alelos[1] == "A":
-            self.size = 65
+            expected_size = 65
 
         elif self.genome.alelos[0] == "a" and self.genome.alelos[1] == "a":
-            self.size = 50
+            expected_size = 50
 
+        self.size = random.gauss(expected_size, standard_deviation)
 
 class Agent:
 
