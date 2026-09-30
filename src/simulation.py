@@ -91,20 +91,49 @@ class Population:
         return Population(offspring)
 
     def height_statistics(self):
+        AA_heights = []
+        Aa_heights = []
+        aa_heights = []
 
+        for agent in self.agents:
 
-        total = 0
+            alelos = agent.genome.alelos
+
+            if alelos[0] == "A" and alelos[1] == "A":
+                AA_heights.append(agent.phenotype.size)
+
+            elif alelos[0] == "a" and alelos[1] == "a":
+                aa_heights.append(agent.phenotype.size)
+
+            else:
+                Aa_heights.append(agent.phenotype.size)
+
+        if len(AA_heights) != 0:
+            AA_media = sum(AA_heights) / len(AA_heights)
+        else:
+            AA_media = None
+
+        if len(aa_heights) != 0:
+            aa_media = sum(aa_heights) / len(aa_heights)
+        else:
+            aa_media = None
+
+        if len(Aa_heights) != 0:
+            Aa_media = sum(Aa_heights) / len(Aa_heights)
+        else:
+            Aa_media = None
+
+        total = sum(AA_heights) + sum(aa_heights) + sum(Aa_heights)
+
         if len(self.agents) > 0:
-            for agent in self.agents: 
-                total += agent.phenotype.size
 
             media = total / len(self.agents)
 
-            return total, media
+            return total, media, AA_media, aa_media, Aa_media
         
         else:
             media = None
-            return total, media
+            return total, media, AA_media, aa_media, Aa_media
 
 
 class Simulation:
@@ -139,6 +168,20 @@ class Simulation:
                 self.population.allele_frequencies()
             )
 
+            total, media, AA_media, aa_media, Aa_media = \
+                self.population.height_statistics()
+
+            print(
+                f"  Height: mean={media:.2f}"
+            )
+
+            print(
+                f"  Height by genotype: "
+                f"AA={AA_media:.2f}, "
+                f"Aa={Aa_media:.2f}, "
+                f"aa={aa_media:.2f}"
+            )
+
 
 def create_initial_population(size):
 
@@ -158,7 +201,7 @@ def create_initial_population(size):
 
 if __name__ == "__main__":
 
-    population = create_initial_population(100)
+    population = create_initial_population(1000)
 
     simulation = Simulation(population)
 
