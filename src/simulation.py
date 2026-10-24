@@ -175,11 +175,15 @@ class Simulation:
                 f"  Height: mean={media:.2f}"
             )
 
+            AA_display = f"{AA_media:.2f}" if AA_media is not None else "N/A"
+            Aa_display = f"{Aa_media:.2f}" if Aa_media is not None else "N/A"
+            aa_display = f"{aa_media:.2f}" if aa_media is not None else "N/A"
+
             print(
                 f"  Height by genotype: "
-                f"AA={AA_media:.2f}, "
-                f"Aa={Aa_media:.2f}, "
-                f"aa={aa_media:.2f}"
+                f"AA={AA_display}, "
+                f"Aa={Aa_display}, "
+                f"aa={aa_display}"
             )
 
 
