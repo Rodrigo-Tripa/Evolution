@@ -1,7 +1,7 @@
 import random
 
 from agent import Agent, Genome
-
+from environment import Environment
 
 class Population:
 
@@ -138,13 +138,17 @@ class Population:
 
 class Simulation:
 
-    def __init__(self, population):
+    def __init__(self, population, environment):
         self.population = population
+        self.environment = environment
+        
         self.generation = 0
 
     def step(self):
 
         self.population = self.population.reproduce()
+        self.food_per_individual = self.get_food_per_individual()
+        print(self.food_per_individual)
         self.generation += 1
 
     def run(self, generations):
@@ -186,6 +190,11 @@ class Simulation:
                 f"aa={aa_display}"
             )
 
+    def get_food_per_individual(self):
+        return self.environment.get_food_per_individual(
+            len(self.population.agents)
+        )
+
 
 def create_initial_population(size):
 
@@ -207,7 +216,9 @@ if __name__ == "__main__":
 
     population = create_initial_population(1000)
 
-    simulation = Simulation(population)
+    environment = Environment(5000)
+
+    simulation = Simulation(population, environment)
 
     print("Initial population:")
     print("  Genotypes:", population.genotype_counts())
