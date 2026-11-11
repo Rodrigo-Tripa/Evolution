@@ -1,165 +1,198 @@
-# Evolution
+# Genome Evolution Lab
 
-A simple computational model of genetic inheritance and population evolution written in Python.
+**An agent-based computational laboratory for studying population evolution through genetic variation, phenotypic expression, and environmental selection.**
 
-The simulation represents a population of individuals with diploid genomes, where each genome contains two alleles:
+## Overview
 
-\[
-G \in \{AA,\ Aa,\ aa\}
-\]
+Genome Evolution Lab is a long-term scientific and computational project focused on modelling the evolution of animal populations through agent-based simulations.
 
-Each genotype produces a phenotype with a genotype-dependent expected value and stochastic variation.
+The project aims to develop a semi-realistic computational model in which each individual possesses a simplified genome, with genetic information influencing its phenotypic and physiological characteristics. These individuals interact with an environment, experience different survival and reproductive conditions, and transmit genetic information to subsequent generations.
 
-## Model
+The central objective is to investigate how genetic variation and environmental conditions influence population dynamics and evolutionary change over successive generations.
 
-The current model uses a single gene with two alleles:
+Rather than attempting to reproduce the complete biological complexity of a real organism, the project focuses on constructing a scientifically grounded model based on explicit biological assumptions, mathematical relationships, and computational methods.
 
-- `A` — dominant allele
-- `a` — recessive allele
+## Scientific Objective
 
-The expected phenotype is determined by genotype:
+The main research direction is to investigate:
 
-\[
-\mu(AA)=80
-\]
+> How do environmental variations influence phenotypic expression, survival, and reproductive success in genetically variable populations of *Drosophila melanogaster*, and how do these differences affect allele frequencies across generations?
 
-\[
-\mu(Aa)=65
-\]
+The project will progressively explore the relationship between genetic variation, environmental conditions, and evolutionary processes.
 
-\[
-\mu(aa)=50
-\]
+The initial research priority is **environmental influence on population evolution**, particularly the effects of temperature. Other environmental variables will be considered as the model develops.
 
-Individual phenotype values are sampled from a Gaussian distribution:
+## Biological Model
 
-\[
-H \sim \mathcal{N}(\mu_g, 4^2)
-\]
+The reference organism selected for the project is *Drosophila melanogaster*, commonly known as the fruit fly.
 
-where \(H\) is the individual's height and \(\mu_g\) is the expected value associated with its genotype.
+This species is widely used in genetics and evolutionary biology research. Its extensive scientific literature and well-characterized genome make it a suitable reference organism for constructing a computational model grounded in established biological knowledge.
 
-## Reproduction
+The simulation will not attempt to reproduce every biological mechanism of the species. Instead, selected genetic and physiological mechanisms will be represented at an appropriate level of abstraction.
 
-Two individuals are randomly selected from the population.
+### Functional Groups
 
-Each parent contributes one randomly selected allele to the offspring:
+Genetic and phenotypic characteristics will be organized into six functional groups:
 
-\[
-G_{offspring} =
-(A_{parent_1}, A_{parent_2})
-\]
+1. **Morphology and Physical Characteristics** — body size, wing morphology, eye characteristics, pigmentation, and locomotor structures.
+2. **Nervous System and Cognition** — sensory processing, learning, memory, and other relevant neural functions.
+3. **Behaviour** — locomotion, food-seeking, exploration, stimulus responses, and escape behaviour.
+4. **Metabolism and Physiology** — energy utilization, digestion, growth, and physiological reserves.
+5. **Reproduction and Development** — fertility, maturation, development, and life-cycle duration.
+6. **Resistance and Adaptation** — thermal tolerance, stress responses, and resistance to environmental challenges.
 
-After inheritance, each allele has a mutation probability of:
+These groups are functional categories rather than independent genetic systems. A gene may influence multiple characteristics, and a phenotype may result from interactions between several genes.
 
-\[
-\mu = 0.1
-\]
+The model will therefore consider relevant genetic relationships, including polygenic inheritance, pleiotropy, epistasis, and genotype–environment interactions, whenever sufficient scientific evidence and modelling justification are available.
 
-A mutation changes the allele:
+## Evolutionary Framework
 
-\[
-A \leftrightarrow a
-\]
-
-The resulting genotype determines the offspring's phenotype.
-
-## Population Genetics
-
-For a population of \(N\) individuals, the simulator calculates genotype frequencies:
-
-\[
-f(AA)=\frac{N_{AA}}{N}
-\]
-
-\[
-f(Aa)=\frac{N_{Aa}}{N}
-\]
-
-\[
-f(aa)=\frac{N_{aa}}{N}
-\]
-
-Allele frequencies are calculated as:
-
-\[
-p(A)=\frac{2N_{AA}+N_{Aa}}{2N}
-\]
-
-\[
-q(a)=\frac{N_{Aa}+2N_{aa}}{2N}
-\]
-
-Therefore:
-
-\[
-p+q=1
-\]
-
-The simulation also tracks the mean phenotype of the complete population and the mean phenotype for each genotype.
-
-## Structure
+The simulation is conceptually based on the following evolutionary process:
 
 ```text
-Evolution/
-├── src/
-│   ├── agent.py
-│   └── simulation.py
-└── README.md
+Genetic Variation
+       |
+       v
+Genotype
+       |
+       v
+Phenotypic Expression
+       |
+       v
+Environmental Interaction
+       |
+       v
+Survival and Reproductive Success
+       |
+       v
+Genetic Transmission
+       |
+       v
+Mutation and Recombination
+       |
+       v
+Next Generation
+       |
+       +------> Repeated Evolutionary Process
 ```
 
-`agent.py` contains the individual-level model:
+Each generation represents a population of individuals whose genetic and phenotypic characteristics influence their interactions with the environment.
 
-- `Genome` — represents the two alleles and mutation.
-- `Phenotype` — generates the phenotype from the genotype.
-- `Agent` — represents an individual and handles reproduction.
+Through differential survival and reproductive success, genetic variants may change in frequency across generations. Mutation and recombination contribute to the genetic variation available to subsequent generations.
 
-`simulation.py` contains the population-level model:
+The model will distinguish between individual-level processes and population-level evolutionary outcomes.
 
-- `Population` — manages individuals and population statistics.
-- `Simulation` — controls the generational process.
+## Environmental Factors
 
-## Running
+Environmental conditions are essential components of the simulation because phenotypic expression and reproductive success may depend on environmental context.
 
-Run the simulation from the project root:
+The initial candidate variables include:
 
-```bash
-python src/simulation.py
-```
+- **Temperature** — thermal conditions and their influence on physiological performance, survival, and reproduction.
+- **Food Availability and Quality** — nutritional resources and their effects on growth, metabolism, and reproductive capacity.
+- **Humidity and Water Availability** — environmental conditions affecting physiological stability.
+- **Population Density** — competition for resources and density-dependent effects.
+- **Photoperiod** — variation in light–dark cycles and potential biological responses.
 
-The default configuration creates a population of 1,000 individuals and simulates 20 generations.
+These variables will be introduced progressively. Initial experiments will prioritize controlled environmental conditions, particularly temperature, to isolate and quantify individual effects.
 
-Example output:
+## Scientific Principles
 
-```text
-Initial population:
-  Genotypes: (160, 520, 320)
-  Genotype frequencies: {'AA': 0.16, 'Aa': 0.52, 'aa': 0.32}
-  Allele frequencies: {'A': 0.42, 'a': 0.58}
+The project follows several principles intended to maintain scientific consistency and experimental reliability.
 
-Generation 1: 1000 agents
-  Genotypes: (...)
-  Alleles: (...)
-  Height: mean=...
-  Height by genotype: AA=..., Aa=..., aa=...
-```
+**Biological grounding:** Genetic characteristics and biological mechanisms should be based on scientific literature and established biological databases whenever possible.
 
-Because reproduction, mutation, and phenotype generation are stochastic, each execution can produce a different result.
+**Explicit assumptions:** Every simplification introduced into the model must be documented. A computational representation of a biological process must not be confused with the complete biological mechanism.
 
-## Scope
+**Genetic and environmental separation:** Genetic effects, environmental effects, and stochastic variation should be distinguished whenever the model allows it.
 
-This is a simplified computational model intended to explore the relationship between:
+**Reproducibility:** Experiments should use documented parameters, controlled conditions, and reproducible random seeds where appropriate.
 
-\[
-\text{Genotype}
-\rightarrow
-\text{Inheritance}
-\rightarrow
-\text{Mutation}
-\rightarrow
-\text{Phenotype}
-\rightarrow
-\text{Population dynamics}
-\]
+**Quantitative analysis:** Evolutionary outcomes should be evaluated using measurable variables, including allele frequencies, genotype distributions, phenotypic distributions, survival rates, reproductive success, and population size.
 
-The model is not intended to accurately represent human genetics. Human height is a complex polygenic trait influenced by many genetic and environmental factors; the single-locus model used here is an abstraction for studying inheritance and population-level behaviour.
+**Model validation:** Simulation behaviour should be compared with theoretical expectations and relevant published experimental findings, within the limitations of the model.
+
+## Computational Research
+
+Genome Evolution Lab is also intended to investigate computational performance in scientific simulations.
+
+As the model becomes more sophisticated, experiments may involve populations of increasing size and simulations spanning thousands or potentially millions of generations.
+
+This creates opportunities to study:
+
+- Algorithmic complexity and execution time.
+- Memory consumption and data representation.
+- Efficient population and genome representations.
+- Vectorization and numerical computation.
+- Parallel processing and scalability.
+- Potential GPU acceleration.
+
+Large population sizes are a possible research direction, not an objective in themselves. Any performance improvements must be evaluated quantitatively and justified by the computational requirements of the model.
+
+The simulation should avoid unnecessary data duplication and distinguish between individual state, genome-derived information, population-level statistics, environmental state, and experimental history.
+
+## Research and Development Roadmap
+
+The project is expected to develop progressively over several years.
+
+### Foundation and Scientific Research
+
+- Consolidate Python programming and computational fundamentals.
+- Study genetics, inheritance, and evolutionary biology.
+- Develop a mathematical foundation in probability and statistics.
+- Review academic literature concerning *Drosophila melanogaster*.
+- Identify relevant genes, biological mechanisms, and environmental effects.
+- Establish the initial scientific assumptions and modelling scope.
+
+### Model Development
+
+- Formalize the relationship between genotype and phenotype.
+- Investigate and implement selected genetic mechanisms.
+- Introduce environmental variables and their effects.
+- Develop population-level evolutionary processes.
+- Establish controlled experimental procedures.
+- Investigate computational efficiency and scalability.
+
+### Experimental Evaluation
+
+- Define specific research questions and testable hypotheses.
+- Formalize the mathematical and biological model.
+- Conduct controlled computational experiments.
+- Collect and analyse quantitative results.
+- Evaluate model behaviour against scientific literature and theoretical expectations.
+- Discuss limitations, assumptions, and possible improvements.
+
+## Scientific Limitations
+
+Genome Evolution Lab is a computational model, not a complete representation of biological reality.
+
+Its results will depend on the assumptions, mathematical functions, genetic mechanisms, environmental parameters, and stochastic processes implemented in the simulation.
+
+Consequently, simulation results must be interpreted within the model's defined scope. They cannot independently establish that real organisms evolve through precisely the same mechanisms or under the same quantitative relationships represented by the simulation.
+
+The project's scientific value will depend on the transparency of its assumptions, the quality of its biological foundations, the reproducibility of its experiments, and the validity of its interpretations.
+
+## Scientific Resources
+
+The project will use academic publications and established biological databases to support its development.
+
+- [FlyBase](https://flybase.org/) — genetic and genomic information concerning *Drosophila*.
+- [NCBI](https://www.ncbi.nlm.nih.gov/) — biological and genomic databases.
+- [Ensembl](https://www.ensembl.org/) — genome annotation and comparative genomics.
+- [PubMed](https://pubmed.ncbi.nlm.nih.gov/) — scientific publications in biomedical and biological research.
+
+## Long-Term Vision
+
+The long-term goal is to develop a scientifically grounded computational laboratory capable of investigating evolutionary processes through controlled, quantitative, and reproducible experiments.
+
+By combining genetics, evolutionary biology, mathematics, statistics, and computational engineering, Genome Evolution Lab aims to provide a framework for studying how genetic variation and environmental conditions interact to shape populations over successive generations.
+
+The project will evolve as scientific understanding and technical capabilities improve. Its biological scope, mathematical models, genetic representations, and computational methods are therefore open to revision.
+
+---
+
+**Project:** Genome Evolution Lab  
+**Reference Organism:** *Drosophila melanogaster*  
+**Research Domain:** Computational Evolutionary Biology  
+**Approach:** Agent-Based Modelling and Scientific Simulation  
+**Status:** Research and Development
