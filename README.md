@@ -181,6 +181,16 @@ The project will use academic publications and established biological databases 
 - [Ensembl](https://www.ensembl.org/) — genome annotation and comparative genomics.
 - [PubMed](https://pubmed.ncbi.nlm.nih.gov/) — scientific publications in biomedical and biological research.
 
+## Contributing
+
+Contributions to Genome Evolution Lab are welcome, including scientific research, biological documentation, software development, testing, and technical improvements.
+
+All contributions must follow the project's scientific, technical, documentation, and attribution standards.
+
+Before contributing, please read the [Contributing Guidelines](CONTRIBUTING.md) for instructions, requirements, and submission procedures.
+
+Thank you for helping improve Genome Evolution Lab.
+
 ## Long-Term Vision
 
 The long-term goal is to develop a scientifically grounded computational laboratory capable of investigating evolutionary processes through controlled, quantitative, and reproducible experiments.
